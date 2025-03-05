@@ -10,4 +10,9 @@ public class TestController {
     public String test() {
         return "hello user module!";
     }
+
+    @GetMapping("test1")
+    public String test1() {
+        return "Test1";
+    }
 }
