@@ -1,4 +1,4 @@
-package com.example.cr.demo.aspect;
+package com.example.cr.common.aspect;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
