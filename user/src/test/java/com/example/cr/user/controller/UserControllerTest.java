@@ -1,16 +1,15 @@
 package com.example.cr.user.controller;
 
 import com.example.cr.user.entity.User;
-import com.example.cr.user.entity.UserExample;
 import com.example.cr.user.mapper.UserMapper;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.UUID;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -27,11 +26,23 @@ public class UserControllerTest {
     @Autowired
     UserMapper userMapper;
 
+    @BeforeEach
+    void before() {
+        // 0. 删除数据库所有数据
+        userMapper.deleteByExample(null);
+
+    }
+
+    @AfterEach
+    void after() {
+        userMapper.deleteByExample(null);
+
+    }
+
     @Test
     public void countTest() throws Exception {
         // Arrange/Act/Assert 或者 Given/When/Then
         // 1. 做准备
-        userMapper.deleteByExample(null);
         User user = new User();
         int number = 8;
         for (int i = 0; i < number; i++) {
