@@ -34,4 +34,5 @@ build/
 
 ### 自定义区块 ###
 application-dev.properties
+application-text.properties
 application-prod.properties
