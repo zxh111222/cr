@@ -1,5 +1,6 @@
 package com.example.cr.user.controller;
 
+import com.example.cr.user.mapper.UserMapper;
 import com.example.cr.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
