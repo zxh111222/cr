@@ -25,6 +25,7 @@
         <module>user</module>
         <module>demo</module>
         <module>common</module>
+        <module>generator</module>
     </modules>
     <scm>
         <connection/>
