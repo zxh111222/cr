@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="mysql" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!-- 自动检查关键字，为关键字增加反引号 -->
+        <property name="autoDelimitKeywords" value="true"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- 覆盖生成 XML 文件 -->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+        <!-- 生成的实体类添加 toString() 方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+
+        <!-- 不生成注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- 配置数据源，根据自己的项目修改 -->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/cr?characterEncoding=UTF8&amp;autoReconnect=true&amp;serverTimezone=Asia/Shanghai&amp;useSSL=false"
+                        userId="root"
+                        password="zxh123123">
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
+
+        <!-- 实体类的位置 targetProject 是相对 pom.xml 的路径-->
+        <javaModelGenerator targetProject="../user/src/main/java" targetPackage="com.example.cr.user.entity"/>
+
+        <!-- mapper xml 的位置 -->
+        <sqlMapGenerator targetProject="../user/src/main/resources" targetPackage="mapper"/>
+
+        <!-- mapper 类的位置，type=XMLMAPPER 表示所有的 sql 都放在 xml 里面 -->
+        <javaClientGenerator targetProject="../user/src/main/java" targetPackage="com.example.cr.user.mapper" type="XMLMAPPER"/>
+        <!-- 表名 -> 类名 -->
+        <table tableName="user" domainObjectName="User"/>
+    </context>
+</generatorConfiguration>
