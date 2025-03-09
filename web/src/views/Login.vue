@@ -1,7 +1,7 @@
 <script setup>
 import {ref} from 'vue'
 import {ElMessage} from 'element-plus'
-import {sendCode} from "@/api/auth.js";
+import {sendCode, login} from "@/api/auth.js";
 
 const mobile = ref('18012345678')
 const code = ref('')
@@ -22,7 +22,6 @@ const handleGetCode = () => {
     .catch((error) => {
       ElMessage.error(error.response?.data?.msg || '发送验证码失败')
     })
-
 }
 
 const handleLogin = () => {
@@ -35,9 +34,17 @@ const handleLogin = () => {
     return
   }
 
-  ElMessage.success('登录成功（查看浏览器的控制台输出）')
-  console.log('用户输入的手机号:', mobile.value)
-  console.log('用户输入的验证码:', code.value)
+  login(mobile.value, code.value)
+    .then((res) => {
+      if (res.code === 200) {
+        ElMessage.success('登录成功')
+      } else {
+        ElMessage.error(res.msg || '登录失败')
+      }
+    })
+    .catch((error) => {
+      ElMessage.error(error.response?.data?.msg || '登录失败')
+    })
 }
 </script>
 
