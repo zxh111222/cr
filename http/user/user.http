@@ -7,10 +7,19 @@ Content-Type: application/x-www-form-urlencoded
 
 mobile = 1512312312
 
-### 注册接口
+### 注册接口 - 手机号不能为空 @NotBlank
 POST http://localhost:8081/user/register
 Content-Type: application/json
 
 {
 "mobile": ""
+}
+
+
+### 注册接口 - 手机号长度校验
+POST http://localhost:8081/user/register
+Content-Type: application/json
+
+{
+"mobile": "123456789101"
 }
