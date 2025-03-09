@@ -2,6 +2,9 @@
 import {computed, ref} from 'vue'
 import {ElMessage} from 'element-plus'
 import {sendCode, login} from "@/api/auth.js";
+import {useRouter} from "vue-router";
+
+const router = useRouter();
 
 const mobile = ref('18012345678')
 const code = ref('')
@@ -45,6 +48,8 @@ const handleLogin = () => {
     .then((res) => {
       if (res.code === 200) {
         ElMessage.success('登录成功')
+        router.push('/dashboard')
+
       } else {
         ElMessage.error(res.msg || '登录失败')
       }
