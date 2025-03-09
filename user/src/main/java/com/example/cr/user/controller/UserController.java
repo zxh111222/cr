@@ -1,6 +1,7 @@
 package com.example.cr.user.controller;
 
 import com.example.cr.user.request.UserRequest;
+import com.example.cr.user.response.R;
 import com.example.cr.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +17,21 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/count")
-    public long count() {
-        return userService.count();
+    public R<Long> count() {
+        R<Long> r = new R<>();
+        r.setCode(200);
+        r.setMessage("OK");
+        r.setData(userService.count());
+        return r;
     }
 
     @PostMapping("/register")
-    public int register(UserRequest request) {
-        return userService.register(request);
+    public R<Integer> register(UserRequest request) {
+        int register = userService.register(request);
+        R<Integer> r = new R<>();
+        r.setCode(200);
+        r.setMessage("OK");
+        r.setData(register);
+        return r;
     }
 }
