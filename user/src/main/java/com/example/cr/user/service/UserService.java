@@ -1,11 +1,13 @@
 package com.example.cr.user.service;
 
-import cn.hutool.core.util.RandomUtil;
+import com.example.cr.common.exception.CommonBusinessException;
+import com.example.cr.common.exception.UserNotExistsException;
 import com.example.cr.common.util.SnowflakeUtil;
 import com.example.cr.user.entity.User;
 import com.example.cr.user.entity.UserExample;
 import com.example.cr.common.exception.UserAlreadyExistsException;
 import com.example.cr.user.mapper.UserMapper;
+import com.example.cr.user.request.LoginRequest;
 import com.example.cr.user.request.SendCodeRequest;
 import com.example.cr.user.request.UserRequest;
 import org.slf4j.Logger;
@@ -72,5 +74,31 @@ public class UserService {
 
         // td-2：对接真实的短信发送服务
         log.info("【模拟】短信发送成功。验证码：{}，手机号：{}", code, mobile);
+    }
+
+    /*
+    暂时先直接返回 User，实际中不应该把用户所有的信息全部返回出去，因为：
+    1. 会涉及隐私的问题，比如密码字段
+    2. 会涉及到很多不必要的字段，比如数据库中的创建时间、更新时间、额外标记字段等等
+    3. 还会涉及到有些字段并不是 User 这个实体的字段，比如 token 等
+     */
+    public User login(LoginRequest request) {
+        String mobile = request.getMobile();
+        String code = request.getCode();
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andMobileEqualTo(mobile);
+        List<User> users = userMapper.selectByExample(userExample);
+
+        // 校验用户是否存在
+        if (users.isEmpty()) {
+            throw new UserNotExistsException("用户不存在");
+        }
+
+        // 校验验证码是否正确
+        if (!"6666".equals(code)) {
+            throw new CommonBusinessException("验证码错误");
+        }
+
+        return users.get(0);
     }
 }

@@ -12,7 +12,7 @@ POST http://localhost:8081/user/register
 Content-Type: application/json
 
 {
-"mobile": ""
+  "mobile": ""
 }
 
 
@@ -21,7 +21,7 @@ POST http://localhost:8081/user/register
 Content-Type: application/json
 
 {
-"mobile": "123456789101"
+  "mobile": "123456789101"
 }
 
 
@@ -30,7 +30,7 @@ POST http://localhost:8081/user/register
 Content-Type: application/json
 
 {
-"mobile": "12345678910"
+  "mobile": "12345678910"
 }
 
 
@@ -40,5 +40,15 @@ POST http://localhost:8081/user/send-code
 Content-Type: application/json
 
 {
-"mobile": "15359311473"
+  "mobile": "15359311473"
+}
+
+
+### 登录
+POST http://localhost:8081/user/login
+Content-Type: application/json
+
+{
+  "mobile": "15359311473",
+  "code" : "6666"
 }
