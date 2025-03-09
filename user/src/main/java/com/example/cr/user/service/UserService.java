@@ -60,7 +60,8 @@ public class UserService {
         }
 
         // 随机得到一串验证码
-        String code = RandomUtil.randomString(4);
+//        String code = RandomUtil.randomString(4);
+        String code = "6666";
         log.info("生成验证码：{}，手机号：{}，业务场景：{}", code, mobile, "登录");
 
         // 验证码发送给目标手机
@@ -71,7 +72,5 @@ public class UserService {
 
         // td-2：对接真实的短信发送服务
         log.info("【模拟】短信发送成功。验证码：{}，手机号：{}", code, mobile);
-
-        // 检查验证码是否匹配
     }
 }
