@@ -2,6 +2,7 @@ package com.example.cr.user.service;
 
 import com.example.cr.user.entity.User;
 import com.example.cr.user.entity.UserExample;
+import com.example.cr.user.exception.UserAlreadyExistsException;
 import com.example.cr.user.mapper.UserMapper;
 import com.example.cr.user.request.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class UserService {
         List<User> users = userMapper.selectByExample(userExample);
         boolean empty = users.isEmpty();
         if (!empty) {
-            throw new RuntimeException("该手机号已注册！");
+            throw new UserAlreadyExistsException("该手机号已注册！");
         }
 
         User user = new User();

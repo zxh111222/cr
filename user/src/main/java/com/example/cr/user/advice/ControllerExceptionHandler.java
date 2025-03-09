@@ -1,5 +1,6 @@
 package com.example.cr.user.advice;
 
+import com.example.cr.user.exception.CustomException;
 import com.example.cr.user.response.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,5 +26,19 @@ public class ControllerExceptionHandler {
         log.error("Exception: {}", e.getMessage());
         // 只要不是自定义的异常，用户只能看到 "系统异常"，保护隐私；但是管理员可以在系统日志中查看详情。
         return R.fail(HttpStatus.INTERNAL_SERVER_ERROR.value(), "系统异常");
+    }
+
+    /**
+     * 捕捉到 CustomException 自定义异常的统一处理
+     * @param e 异常
+     * @return R 统一返回结果
+     */
+    @ExceptionHandler(value = CustomException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public R<Object> CustomExceptionHandler(Exception e) {
+        log.error("CustomException: {}", e.getMessage());
+        // 只要不是自定义的异常，用户只能看到 "系统异常"，保护隐私；但是管理员可以在系统日志中查看详情。
+        return R.fail(HttpStatus.BAD_REQUEST.value(), e.getMessage());
     }
 }

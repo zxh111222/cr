@@ -2,7 +2,6 @@ package com.example.cr.user.controller;
 
 import com.example.cr.user.entity.User;
 import com.example.cr.user.mapper.UserMapper;
-import jakarta.servlet.ServletException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -84,8 +83,8 @@ public class UserControllerTest {
         // 2.操作
         // 3.验证
         mockMvc.perform(post("/user/register").param("mobile", mobile))
-                .andExpect(status().is5xxServerError())
-                .andExpect(jsonPath("$.msg").value("系统异常"));
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.msg").value("该手机号已注册！"));
 
     }
 }
