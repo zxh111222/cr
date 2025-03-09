@@ -5,10 +5,7 @@ import com.example.cr.common.response.R;
 import com.example.cr.user.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("user")
@@ -23,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public R<Integer> register(@Valid UserRequest request) {
+    public R<Integer> register(@Valid @RequestBody UserRequest request) {
         return R.ok(userService.register(request));
     }
 }
