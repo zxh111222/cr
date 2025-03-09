@@ -40,6 +40,7 @@ const handleLogin = () => {
       <el-form class="login-form">
         <el-form-item>
           <el-input
+            size="large"
             v-model="mobile"
             placeholder="18012345678"
             maxlength="11"
@@ -48,25 +49,28 @@ const handleLogin = () => {
         </el-form-item>
 
         <el-form-item>
-          <div class="verification-code">
-            <el-input
-              v-model="code"
-              placeholder="请输入验证码"
-              class="code-input"
-            />
-            <el-button
-              type="primary"
-              class="get-code-btn"
-              @click="handleGetCode"
-            >
-              获取验证码
-            </el-button>
-          </div>
+          <el-input
+            v-model="code"
+            placeholder="请输入验证码"
+          >
+            <template #append>
+              <el-button
+                type="primary"
+                size="large"
+                class="get-code-btn"
+                :style="{ color: 'var(--el-color-primary)' }"
+                @click="handleGetCode"
+              >
+                获取验证码
+              </el-button>
+            </template>
+          </el-input>
         </el-form-item>
 
         <el-form-item>
           <el-button
             type="primary"
+            size="large"
             class="login-btn"
             @click="handleLogin"
           >
@@ -116,26 +120,13 @@ const handleLogin = () => {
   width: 100%;
 }
 
-.verification-code {
-  display: flex;
-  gap: 10px;
-}
-
-.code-input {
-  flex: 1;
-}
-
 .get-code-btn {
   width: 120px;
+  background-color: transparent !important;
 }
 
 .login-btn {
   width: 100%;
-  height: 40px;
   font-size: 16px;
-}
-
-:deep(.el-input__inner) {
-  height: 40px;
 }
 </style>
