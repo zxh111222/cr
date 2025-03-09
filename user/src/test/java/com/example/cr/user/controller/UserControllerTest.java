@@ -1,5 +1,6 @@
 package com.example.cr.user.controller;
 
+import com.example.cr.common.util.SnowflakeUtil;
 import com.example.cr.user.entity.User;
 import com.example.cr.user.mapper.UserMapper;
 import com.example.cr.user.request.UserRequest;
@@ -55,7 +56,7 @@ public class UserControllerTest {
         User user = new User();
         int number = 8;
         for (int i = 0; i < number; i++) {
-            user.setId(System.currentTimeMillis() + i);
+            user.setId(SnowflakeUtil.getId());
             user.setMobile(i + "0123456");
             userMapper.insert(user);
         }
@@ -69,7 +70,7 @@ public class UserControllerTest {
     @Test
     void register() throws Exception {
         // 1.准备
-        String mobile = "12345678910";
+        String mobile = "13345678910";
         UserRequest userRequest = new UserRequest();
         userRequest.setMobile(mobile);
         String content = objectMapper.writeValueAsString(userRequest);
@@ -86,9 +87,9 @@ public class UserControllerTest {
     @Test
     void register_shouldThrowExceptionWhenMobileAlreadyRegistered() throws Exception {
         // 1.准备
-        String mobile = "12345678910";
+        String mobile = "13345678910";
         User user = new User();
-        user.setId(System.currentTimeMillis());
+        user.setId(SnowflakeUtil.getId());
         user.setMobile(mobile);
         userMapper.insert(user);
 
