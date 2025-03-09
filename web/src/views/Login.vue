@@ -6,6 +6,8 @@ import {sendCode, login} from "@/api/auth.js";
 const mobile = ref('18012345678')
 const code = ref('')
 
+const loading = ref(false)
+
 const isLoginDisabled = computed(() => {
   return code.value.length < 4 || !code.value
 })
@@ -38,6 +40,7 @@ const handleLogin = () => {
     return
   }
 
+  loading.value = true
   login(mobile.value, code.value)
     .then((res) => {
       if (res.code === 200) {
@@ -48,6 +51,9 @@ const handleLogin = () => {
     })
     .catch((error) => {
       ElMessage.error(error.response?.data?.msg || '登录失败')
+    })
+    .finally(() => {
+      loading.value = false
     })
 }
 </script>
@@ -97,6 +103,7 @@ const handleLogin = () => {
             class="login-btn"
             @click="handleLogin"
             :disabled="isLoginDisabled"
+            :loading="loading"
           >
             登录
           </el-button>
