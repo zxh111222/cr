@@ -1,8 +1,10 @@
 package com.example.cr.user.request;
 
+import jakarta.validation.constraints.NotBlank;
 
 public class UserRequest {
 
+    @NotBlank
     String mobile;
 
     public String getMobile() {
