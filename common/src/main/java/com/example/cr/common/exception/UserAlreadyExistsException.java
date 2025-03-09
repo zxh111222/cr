@@ -1,4 +1,4 @@
-package com.example.cr.user.exception;
+package com.example.cr.common.exception;
 
 
 public class UserAlreadyExistsException extends CustomException {

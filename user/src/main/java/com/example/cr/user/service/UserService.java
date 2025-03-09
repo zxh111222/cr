@@ -2,7 +2,7 @@ package com.example.cr.user.service;
 
 import com.example.cr.user.entity.User;
 import com.example.cr.user.entity.UserExample;
-import com.example.cr.user.exception.UserAlreadyExistsException;
+import com.example.cr.common.exception.UserAlreadyExistsException;
 import com.example.cr.user.mapper.UserMapper;
 import com.example.cr.user.request.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;

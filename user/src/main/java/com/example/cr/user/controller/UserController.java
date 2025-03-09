@@ -1,7 +1,7 @@
 package com.example.cr.user.controller;
 
 import com.example.cr.user.request.UserRequest;
-import com.example.cr.user.response.R;
+import com.example.cr.common.response.R;
 import com.example.cr.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,7 +1,7 @@
-package com.example.cr.user.advice;
+package com.example.cr.common.advice;
 
-import com.example.cr.user.exception.CustomException;
-import com.example.cr.user.response.R;
+import com.example.cr.common.exception.CustomException;
+import com.example.cr.common.response.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
