@@ -82,12 +82,10 @@ public class UserControllerTest {
         user.setMobile(mobile);
         userMapper.insert(user);
         // 2.操作
-        // 正常应该测试返回 RuntimeException，由于默认情况 Spring Boot 的 Controller 层对运行时异常做了二次封装，
-        // 所以这里测试捕获 ServletException
-        ServletException exception = Assertions.assertThrows(ServletException.class, () -> {
-            mockMvc.perform(post("/user/register").param("mobile", mobile));
-        });
         // 3.验证
-        Assertions.assertTrue(exception.getMessage().contains("该手机号已注册"));
+        mockMvc.perform(post("/user/register").param("mobile", mobile))
+                .andExpect(status().is5xxServerError())
+                .andExpect(jsonPath("$.msg").value("系统异常"));
+
     }
 }
