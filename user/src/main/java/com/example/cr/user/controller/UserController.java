@@ -1,5 +1,6 @@
 package com.example.cr.user.controller;
 
+import com.example.cr.user.request.UserRequest;
 import com.example.cr.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public int register(String mobile) {
-        return userService.register(mobile);
+    public int register(UserRequest request) {
+        return userService.register(request);
     }
 }
