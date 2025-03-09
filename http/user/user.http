@@ -40,7 +40,7 @@ POST http://localhost:8081/user/send-code
 Content-Type: application/json
 
 {
-  "mobile": "15359311473"
+  "mobile": "18012345678"
 }
 
 
