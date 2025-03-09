@@ -32,3 +32,13 @@ Content-Type: application/json
 {
 "mobile": "12345678910"
 }
+
+
+
+### 发送短信验证码
+POST http://localhost:8081/user/send-code
+Content-Type: application/json
+
+{
+"mobile": "15359311473"
+}

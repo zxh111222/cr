@@ -1,5 +1,6 @@
 package com.example.cr.user.controller;
 
+import com.example.cr.user.request.SendCodeRequest;
 import com.example.cr.user.request.UserRequest;
 import com.example.cr.common.response.R;
 import com.example.cr.user.service.UserService;
@@ -22,5 +23,11 @@ public class UserController {
     @PostMapping("/register")
     public R<Integer> register(@Valid @RequestBody UserRequest request) {
         return R.ok(userService.register(request));
+    }
+
+    @PostMapping("/send-code")
+    public R<Object>  sendConde(@Valid @RequestBody SendCodeRequest request) {
+        userService.sendCode(request);
+        return R.ok();
     }
 }
