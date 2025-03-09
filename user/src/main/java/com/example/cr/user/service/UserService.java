@@ -1,7 +1,9 @@
 package com.example.cr.user.service;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.example.cr.common.exception.CommonBusinessException;
 import com.example.cr.common.exception.UserNotExistsException;
+import com.example.cr.common.response.LoginResponse;
 import com.example.cr.common.util.SnowflakeUtil;
 import com.example.cr.user.entity.User;
 import com.example.cr.user.entity.UserExample;
@@ -77,12 +79,13 @@ public class UserService {
     }
 
     /*
+    [已解决]
     暂时先直接返回 User，实际中不应该把用户所有的信息全部返回出去，因为：
     1. 会涉及隐私的问题，比如密码字段
     2. 会涉及到很多不必要的字段，比如数据库中的创建时间、更新时间、额外标记字段等等
     3. 还会涉及到有些字段并不是 User 这个实体的字段，比如 token 等
      */
-    public User login(LoginRequest request) {
+    public LoginResponse login(LoginRequest request) {
         String mobile = request.getMobile();
         String code = request.getCode();
         UserExample userExample = new UserExample();
@@ -99,6 +102,7 @@ public class UserService {
             throw new CommonBusinessException("验证码错误");
         }
 
-        return users.get(0);
+        User user = users.get(0);
+        return BeanUtil.copyProperties(user, LoginResponse.class);
     }
 }

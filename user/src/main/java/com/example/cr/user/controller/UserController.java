@@ -1,6 +1,6 @@
 package com.example.cr.user.controller;
 
-import com.example.cr.user.entity.User;
+import com.example.cr.common.response.LoginResponse;
 import com.example.cr.user.request.LoginRequest;
 import com.example.cr.user.request.SendCodeRequest;
 import com.example.cr.user.request.UserRequest;
@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public R<User> login(@Valid @RequestBody LoginRequest request) {
+    public R<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
         return R.ok(userService.login(request));
     }
 }
