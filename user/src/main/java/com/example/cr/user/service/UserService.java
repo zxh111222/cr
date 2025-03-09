@@ -1,5 +1,6 @@
 package com.example.cr.user.service;
 
+import com.example.cr.common.util.SnowflakeUtil;
 import com.example.cr.user.entity.User;
 import com.example.cr.user.entity.UserExample;
 import com.example.cr.common.exception.UserAlreadyExistsException;
@@ -33,7 +34,7 @@ public class UserService {
         }
 
         User user = new User();
-        user.setId(System.currentTimeMillis());
+        user.setId(SnowflakeUtil.getId());
         user.setMobile(mobile);
         return userMapper.insert(user);
     }
