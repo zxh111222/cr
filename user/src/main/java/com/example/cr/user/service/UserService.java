@@ -51,9 +51,7 @@ public class UserService {
     public void sendCode(SendCodeRequest request) {
         // 从 request 获取输入手机号和验证码
         String mobile = request.getMobile();
-        UserExample userExample = new UserExample();
-        userExample.createCriteria().andMobileEqualTo(mobile);
-        List<User> users = userMapper.selectByExample(userExample);
+        List<User> users = selectByMobile(mobile);
         if (users.isEmpty()) {
             // 如果为空，即这个手机号没有注册过
             User user = new User();
@@ -85,12 +83,11 @@ public class UserService {
     2. 会涉及到很多不必要的字段，比如数据库中的创建时间、更新时间、额外标记字段等等
     3. 还会涉及到有些字段并不是 User 这个实体的字段，比如 token 等
      */
+
     public LoginResponse login(LoginRequest request) {
         String mobile = request.getMobile();
         String code = request.getCode();
-        UserExample userExample = new UserExample();
-        userExample.createCriteria().andMobileEqualTo(mobile);
-        List<User> users = userMapper.selectByExample(userExample);
+        List<User> users = selectByMobile(mobile);
 
         // 校验用户是否存在
         if (users.isEmpty()) {
@@ -104,5 +101,12 @@ public class UserService {
 
         User user = users.get(0);
         return BeanUtil.copyProperties(user, LoginResponse.class);
+    }
+
+    private List<User> selectByMobile(String mobile) {
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andMobileEqualTo(mobile);
+        List<User> users = userMapper.selectByExample(userExample);
+        return users;
     }
 }
