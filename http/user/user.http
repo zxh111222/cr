@@ -23,3 +23,12 @@ Content-Type: application/json
 {
 "mobile": "123456789101"
 }
+
+
+### 注册接口 - @Pattern(regexp = "^1[3-9]\\d{9}$", message = "手机号格式不正确")
+POST http://localhost:8081/user/register
+Content-Type: application/json
+
+{
+"mobile": "12345678910"
+}
