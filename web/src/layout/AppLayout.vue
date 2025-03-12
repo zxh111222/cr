@@ -76,7 +76,7 @@
           <el-dropdown trigger="click" @visible-change="handleDropdownVisibleChange">
             <span class="user-info">
               <el-avatar :size="32"/>
-              <span class="username">管理员</span>
+              <span class="username">{{ userStore.mobile }}</span>
               <el-icon class="el-icon--right" :class="{ 'is-reverse': isDropdownVisible }">
                 <arrow-down/>
               </el-icon>
@@ -132,6 +132,10 @@ import {
   Expand,
   ArrowDown
 } from '@element-plus/icons-vue'
+import {useUserStore} from "@/stores/user.js";
+
+
+const userStore = useUserStore();
 
 const router = useRouter()
 const isCollapse = ref(false)
