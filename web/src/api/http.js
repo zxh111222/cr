@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {useUserStore} from "@/stores/user.js";
 
 const http = axios.create({
   baseURL: 'http://localhost:8081',
@@ -8,6 +9,10 @@ const http = axios.create({
 // Request interceptor
 http.interceptors.request.use(
   config => {
+    const userStore = useUserStore()
+    if (userStore.token){
+      config.headers.Authorization = `Bearer ${userStore.token}`
+    }
     console.log('请求：', config)
     return config
   },
