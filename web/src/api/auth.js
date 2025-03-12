@@ -7,3 +7,7 @@ export function sendCode(mobile) {
 export function login(mobile, code) {
   return http.post('/user/login', {mobile, code})
 }
+
+export function ping() {
+  return http.get('/ping')
+}
