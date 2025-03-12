@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("user")
-@CrossOrigin("http://localhost:5173")
 public class UserController {
 
     @Autowired
@@ -45,5 +44,10 @@ public class UserController {
         String token = customJWTUtils.createToken(loginResponse.getId(), loginResponse.getMobile());
         loginResponse.setToken(token);
         return R.ok(loginResponse);
+    }
+
+    @GetMapping("ping")
+    public R<String> ping() {
+        return R.ok("pong");
     }
 }

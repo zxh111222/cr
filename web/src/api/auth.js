@@ -9,5 +9,5 @@ export function login(mobile, code) {
 }
 
 export function ping() {
-  return http.get('/ping')
+  return http.get('/user/ping')
 }
