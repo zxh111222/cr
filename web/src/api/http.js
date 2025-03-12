@@ -1,4 +1,5 @@
 import axios from 'axios'
+import router from "@/router/index.js";
 import {useUserStore} from "@/stores/user.js";
 
 const http = axios.create({
@@ -29,6 +30,19 @@ http.interceptors.response.use(
     return response.data
   },
   error => {
+    // 如果后端返回 401 未授权错误（未登录或 token 失效）
+    if (error.response?.status === 401) {
+      const userStore = useUserStore()
+      // 清除用户信息
+      userStore.clearUserInfo()
+      // 跳转到登录页，并带上原本要去的路径
+      router.push({
+        path: '/login',
+        query: {
+          redirect: router.currentRoute.value.fullPath
+        }
+      })
+    }
     console.log('响应错误：', error)
     return Promise.reject(error)
   }

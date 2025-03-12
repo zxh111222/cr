@@ -9,6 +9,9 @@ onMounted(() => {
     .then((res) => {
       content.value = res.data
     })
+    .catch((error) => {
+      console.log('访问 ping 出错' + error)
+    })
 })
 </script>
 
