@@ -1,5 +1,6 @@
 package com.example.cr.user.controller;
 
+import com.example.cr.common.util.CustomJWTUtils;
 import com.example.cr.common.util.SnowflakeUtil;
 import com.example.cr.user.entity.User;
 import com.example.cr.user.mapper.UserMapper;
@@ -36,11 +37,20 @@ public class UserControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
+    @Autowired
+    CustomJWTUtils customJWTUtils;
+
+    static String token;
+
     @BeforeEach
     void before() {
         // 0. 删除数据库所有数据
         userMapper.deleteByExample(null);
 
+        // 创建一个 token
+        if (token == null) {
+            token = customJWTUtils.createToken(1L, "15359311473");
+        }
     }
 
     @AfterEach
@@ -62,7 +72,7 @@ public class UserControllerTest {
         }
         // 2. 真正的发起请求
         // 3. 验证一定返回十条数据
-        mockMvc.perform(get("/user/count"))
+        mockMvc.perform(get("/user/count").header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").value(number));
     }
