@@ -1,6 +1,10 @@
 ### 测试 test 接口
 GET http://localhost:8081/test
 
+### 测试 test 接口 - 经过网关 gateway
+GET http://localhost:8000/u/test
+
+
 ### 测试 ping 接口
 GET http://localhost:8081/user/ping
 Content-Type: application/json
