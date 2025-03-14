@@ -3,7 +3,7 @@ import router from "@/router/index.js";
 import {useUserStore} from "@/stores/user.js";
 
 const http = axios.create({
-  baseURL: 'http://localhost:8081',
+  baseURL: 'http://localhost:8000',
   timeout: 5000
 })
 
