@@ -8,3 +8,9 @@ spring:
           filters:
             - StripPrefix=1
           uri: http://127.0.0.1:8081
+        - id: demo
+          predicates:
+            - Path=/d/**
+          filters:
+            - StripPrefix=1
+          uri: http://127.0.0.1:8080
