@@ -1,5 +1,6 @@
 ### 测试 count 接口
 GET http://localhost:8081/user/count
+Authorization: Bearer {{token}}
 
 ### 注册接口
 POST http://localhost:8081/user/register
@@ -44,7 +45,7 @@ Content-Type: application/json
 }
 
 
-### 登录
+### 登录 登录成功后把 token 设置到某个变量里面去
 POST http://localhost:8081/user/login
 Content-Type: application/json
 
@@ -52,3 +53,9 @@ Content-Type: application/json
   "mobile": "15359311473",
   "code" : "6666"
 }
+
+> {%
+    console.log(JSON.stringify(response.body))
+    console.log(JSON.stringify(response.body.data.token))
+    client.global.set('token', response.body.data.token)
+%}

@@ -2,5 +2,6 @@
 GET http://localhost:8081/test
 
 ### 测试 ping 接口
-GET http://localhost:8081/ping
-
+GET http://localhost:8081/user/ping
+Content-Type: application/json
+Authorization: Bearer {{token}}
