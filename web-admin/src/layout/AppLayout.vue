@@ -3,7 +3,7 @@
     <el-aside :width="isCollapse ? '64px' : '200px'" class="aside-container">
       <div class="logo-container">
         <img src="@/assets/logo.svg" alt="Logo" class="logo">
-        <span v-show="!isCollapse" class="logo-text">cr App</span>
+        <span v-show="!isCollapse" class="logo-text">cr - Admin</span>
       </div>
       <el-scrollbar>
         <el-menu

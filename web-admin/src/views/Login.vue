@@ -72,7 +72,7 @@ const handleLogin = () => {
     <div class="login-box">
       <div class="header">
         <img src="@/assets/logo.svg" alt="Logo" class="logo">
-        <h1 class="title">cr APP</h1>
+        <h1 class="title">cr - Admin</h1>
       </div>
 
       <el-form class="login-form" @keyup.enter="handleLogin">
