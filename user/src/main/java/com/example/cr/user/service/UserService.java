@@ -15,6 +15,7 @@ import com.example.cr.user.request.UserRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +26,9 @@ public class UserService {
 
     @Autowired
     UserMapper userMapper;
+
+    @Value("${adminIds}")
+    List<String> adminIds;
 
     public long count() {
         return userMapper.countByExample(null);
@@ -84,7 +88,7 @@ public class UserService {
     3. 还会涉及到有些字段并不是 User 这个实体的字段，比如 token 等
      */
 
-    public LoginResponse login(LoginRequest request) {
+    public LoginResponse login(LoginRequest request, boolean isAdminLogin) {
         String mobile = request.getMobile();
         String code = request.getCode();
         List<User> users = selectByMobile(mobile);
@@ -100,6 +104,12 @@ public class UserService {
         }
 
         User user = users.get(0);
+
+        // 如果 isAdminLogin 等于 true，只有是 adminIds 配置的用户才能进行登录
+        if (isAdminLogin && !adminIds.contains(user.getId().toString())) {
+            throw new CommonBusinessException("权限不足！");
+        }
+
         return BeanUtil.copyProperties(user, LoginResponse.class);
     }
 

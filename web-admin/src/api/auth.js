@@ -7,7 +7,7 @@ export function sendCode(mobile) {
 }
 
 export function login(mobile, code) {
-  return http.post(MODULE_PREFIX + '/user/login', {mobile, code})
+  return http.post(MODULE_PREFIX + '/user/admin-login', {mobile, code})
 }
 
 export function ping() {

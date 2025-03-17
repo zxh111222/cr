@@ -23,6 +23,7 @@ public class BearerTokenFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String path = exchange.getRequest().getURI().getPath();
         if (path.endsWith("/login")
+                || path.endsWith("/admin-login")
                 || path.endsWith("/register")
                 || path.endsWith("/send-code")
                 || path.contains("/test")) {
