@@ -36,3 +36,4 @@ build/
 application-dev.properties
 application-text.properties
 application-prod.properties
+logs
