@@ -14,9 +14,21 @@ public class CodeGenerator {
 
     public static void main(String[] args) throws Exception {
         CustomFreemarkerUtil.getTemplate("test.ftl");
+
+        String tableName = "user";
+        String c = tableName.charAt(0) + "";
+        String upperCase = c.toUpperCase();
+        System.out.println(upperCase);
+        String substring = tableName.substring(1);
+        System.out.println(substring);
+        String tableNameUpperCase = upperCase + substring;
+        System.out.println(tableNameUpperCase);
+        String className = String.format("%sService", tableNameUpperCase);
+        System.out.println(className);
+
         Map<String, Object> data = new HashMap<>();
-        String className = "Test123";
         data.put("className", className);
+
         CustomFreemarkerUtil.generate(toPath + className + ".java", data);
     }
 }
