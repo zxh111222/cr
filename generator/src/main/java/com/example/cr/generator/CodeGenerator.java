@@ -37,6 +37,9 @@ public class CodeGenerator {
 //
 
         String configurationFile = readConfigurationFileFromPomXml();
+        // 动态获取当前模块名
+        String module = configurationFile.replace("src/main/resources/generator-config-", "").replace(".xml", "");
+        System.out.println("代码要自动生成到哪个模块 = " + module);
         Document document = new SAXReader().read("generator/" + configurationFile);
         List<Node> nodes = document.selectNodes("//table");
         for (Node table : nodes) {
