@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CodeGenerator {
-    static String toPath = "generator/src/main/java/com/example/cr/generator/demo/";
+    static String toPath = "[module]/src/main/java/com/example/cr/[module]/demo/";
 
     static String pomPath ="generator/pom.xml";
 
@@ -40,6 +40,10 @@ public class CodeGenerator {
         // 动态获取当前模块名
         String module = configurationFile.replace("src/main/resources/generator-config-", "").replace(".xml", "");
         System.out.println("代码要自动生成到哪个模块 = " + module);
+        toPath = toPath.replace("[module]", module);
+        System.out.println("动态修改后的 toPath 路径" + toPath);
+        new File(toPath).mkdirs();
+
         Document document = new SAXReader().read("generator/" + configurationFile);
         List<Node> nodes = document.selectNodes("//table");
         for (Node table : nodes) {
@@ -54,7 +58,7 @@ public class CodeGenerator {
             Map<String, Object> data = new HashMap<>();
             data.put("className", className);
 
-            CustomFreemarkerUtil.generate(toPath + className + ".java", data);
+            CustomFreemarkerUtil.generate(CodeGenerator.toPath + className + ".java", data);
         }
 
     }
