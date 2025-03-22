@@ -57,6 +57,7 @@ public class CodeGenerator {
 
             Map<String, Object> data = new HashMap<>();
             data.put("className", className);
+            data.put("module", module);
 
             CustomFreemarkerUtil.generate(CodeGenerator.toPath + className + ".java", data);
         }
